@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BAC English">
+<meta name="theme-color" content="#080B1A">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>BAC English Guide</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--bg:#080B1A;--card:rgba(12,16,35,.65);--surface:#0D1124;--border:rgba(255,255,255,.06);--text:#E8F0FF;--muted:#8892C0;--dark:#5A6080;--cyan:#00E5FF;--violet:#7C3AED;--pink:#FF6B9D;--gold:#FFD93D;--grad:linear-gradient(135deg,#00E5FF,#7C3AED);--grad2:linear-gradient(135deg,#E8F0FF,#7C3AED,#FF6B9D);--heading:'SF Pro Display',-apple-system,'Helvetica Neue',sans-serif;--font:-apple-system,'Helvetica Neue',sans-serif;--sidebar-w:280px;--top-h:52px;--radius:12px}
+[data-theme=light]{--bg:#EDF0F8;--card:rgba(255,255,255,.7);--surface:#FFF;--border:rgba(0,0,0,.08);--text:#1A1D2E;--muted:#6A7090;--dark:#8A90A8;--cyan:#0099CC;--violet:#6D28D9;--pink:#E04070;--gold:#CC9900}
+html,body{height:100%;margin:0;overflow:hidden;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--text);display:flex}
+*{box-sizing:border-box;margin:0;padding:0}
+input,button{font-family:var(--font);font-size:16px}
+a{color:var(--cyan);text-decoration:none}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* ===== SIDEBAR ===== */
+.sidebar{width:var(--sidebar-w);height:100%;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;z-index:100}
+.sb-header{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border);cursor:pointer;flex-shrink:0}
+.sb-header:active{opacity:.7}
+.sb-icon{font-size:28px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sb-brand{font-family:var(--heading);font-size:18px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sb-flag{font-size:18px}
+.sb-search{display:flex;align-items:center;gap:8px;padding:10px 14px;margin:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;flex-shrink:0}
+.sb-search i{color:var(--dark);font-size:14px}
+.sb-search input{flex:1;background:none;border:none;color:var(--text);font-size:15px;outline:none;min-width:0}
+.sb-search input::placeholder{color:var(--dark)}
+.sb-nav{flex:1;overflow-y:auto;padding:6px 10px 12px;-webkit-overflow-scrolling:touch}
+.sb-chapter{padding:10px 14px;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:6px}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;cursor:pointer;font-size:14px;transition:all .15s;color:var(--text);-webkit-tap-highlight-color:transparent}
+.sb-item:active,.sb-item:hover{background:var(--card)}
+.sb-item.active{background:rgba(0,229,255,.1);color:var(--cyan)}
+.sb-item .sb-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);opacity:0;transition:opacity .2s}
+.sb-item.active .sb-dot{opacity:1}
+.sb-item .sb-check{color:var(--cyan);font-size:11px;margin-left:auto;opacity:0;transition:opacity .2s}
+.sb-item .sb-check.show{opacity:1}
+.sb-item .sb-tt{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ===== MAIN ===== */
+.main{flex:1;display:flex;flex-direction:column;height:100%;min-width:0}
+
+/* ===== TOP BAR ===== */
+.topbar{height:var(--top-h);display:flex;align-items:center;padding:0 18px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px}
+.topbar .tb-menu{display:none;background:none;border:none;color:var(--muted);font-size:20px;width:36px;height:36px;border-radius:8px;cursor:pointer}
+.topbar .tb-menu:active{color:var(--cyan)}
+.topbar .tb-bc{display:flex;align-items:center;gap:8px;font-size:14px;flex:1;min-width:0}
+.topbar .tb-bc .bc-home{color:var(--dark);cursor:pointer}
+.topbar .tb-bc .bc-home:hover{color:var(--gold)}
+.topbar .tb-bc .bc-sep{color:var(--dark);font-size:10px}
+.topbar .tb-bc .bc-cur{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
+.topbar .tb-bc .bc-ch{color:var(--violet);cursor:pointer}
+.topbar .tb-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.tb-btn{background:none;border:1px solid var(--border);color:var(--muted);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.tb-btn:active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,.06)}
+
+/* ===== CONTENT ===== */
+.content{flex:1;overflow-y:auto;padding:20px 28px 32px;-webkit-overflow-scrolling:touch}
+.content:focus{outline:none}
+
+/* ===== DASHBOARD ===== */
+.db-hero{text-align:center;padding:24px 10px 12px}
+.db-hero .db-icon{font-size:56px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.db-hero h1{font-family:var(--heading);font-size:32px;font-weight:800;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:4px 0}
+.db-hero .db-sub{font-size:14px;color:var(--muted)}
+.db-continue{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin:16px 0;cursor:pointer;transition:border-color .2s;max-width:500px}
+.db-continue:active{border-color:var(--cyan);background:rgba(0,229,255,.03)}
+.db-continue .dc-icon{font-size:32px;color:var(--cyan)}
+.db-continue .dc-info{flex:1}
+.db-continue .dc-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.db-continue .dc-title{font-weight:600;font-size:15px}
+.db-continue .dc-ch{font-size:12px;color:var(--muted)}
+.db-stats{display:flex;gap:12px;margin:16px 0;flex-wrap:wrap}
+.db-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 22px;text-align:center;min-width:100px}
+.db-stat .ds-num{font-size:24px;font-weight:800;color:var(--cyan);display:block}
+.db-stat .ds-lbl{font-size:12px;color:var(--muted);margin-top:2px}
+.db-stat.gold .ds-num{color:var(--gold)}
+.db-stat.violet .ds-num{color:var(--violet)}
+.db-title{font-family:var(--heading);font-size:18px;font-weight:700;margin:24px 0 14px;display:flex;align-items:center;gap:8px}
+.db-title i{color:var(--gold)}
+.chapter-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.ch-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;cursor:pointer;transition:border-color .2s}
+.ch-card:active{border-color:var(--cyan)}
+.ch-card .ch-icon{font-size:28px;margin-bottom:8px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ch-card .ch-name{font-family:var(--heading);font-weight:700;font-size:16px}
+.ch-card .ch-count{font-size:12px;color:var(--muted);margin:2px 0 10px}
+.ch-card .ch-bar{height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.ch-card .ch-fill{height:100%;width:0%;background:var(--grad);border-radius:2px;transition:width .5s}
+
+/* ===== CHAPTER MODULE ===== */
+.ch-module{padding:10px 0}
+.ch-head{text-align:center;padding:20px 10px 16px}
+.ch-head h2{font-family:var(--heading);font-size:28px;font-weight:700;background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ch-head .ch-sub{font-size:13px;color:var(--muted);margin-top:6px}
+.ch-head .ch-prog{max-width:350px;margin:16px auto 0;display:flex;align-items:center;gap:12px}
+.ch-head .ch-bar2{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.ch-head .ch-fill2{height:100%;width:0%;background:var(--grad);border-radius:3px;transition:width .5s}
+.ch-head .ch-pct{font-size:13px;font-weight:700;color:var(--cyan)}
+.lesson-list{display:flex;flex-direction:column;gap:6px;max-width:600px;margin:0 auto}
+.lesson-item{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color .15s;-webkit-tap-highlight-color:transparent}
+.lesson-item:active{border-color:var(--cyan)}
+.lesson-item .li-status{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--muted);flex-shrink:0;transition:all .3s}
+.lesson-item .li-status.done{border-color:var(--cyan);background:rgba(0,229,255,.12);color:var(--cyan)}
+.lesson-item .li-info{flex:1;min-width:0}
+.lesson-item .li-title{font-size:15px;font-weight:500}
+.lesson-item .li-meta{font-size:12px;color:var(--muted)}
+.lesson-item .li-arrow{color:var(--dark);font-size:12px}
+
+/* ===== READER ===== */
+.reader{max-width:720px;margin:0 auto;padding-bottom:24px}
+.reader h2{font-family:var(--heading);font-size:24px;font-weight:700;margin:20px 0 10px}
+.reader h3{font-size:17px;font-weight:700;margin:18px 0 8px;color:var(--cyan)}
+.reader p{margin:8px 0;line-height:1.8;font-size:15px}
+.reader strong{color:var(--gold)}
+.reader ul,ol{padding-left:24px;margin:10px 0}
+.reader li{margin:6px 0;line-height:1.7;font-size:15px}
+.reader del{color:var(--pink);text-decoration:line-through}
+.reader table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.reader th{background:rgba(0,229,255,.08);color:var(--cyan);font-weight:700;padding:12px 16px;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+.reader td{padding:11px 16px;border-bottom:1px solid var(--border)}
+.reader tr:last-child td{border-bottom:none}
+.reader .bridge-box{background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.2);border-left:4px solid var(--cyan);border-radius:var(--radius);padding:18px 22px;margin:14px 0}
+.reader .bridge-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:var(--cyan);margin-bottom:8px}
+.reader .bridge-box p{margin:5px 0;font-size:14px;line-height:1.7}
+.reader .example-box{background:rgba(255,217,61,.06);border:1px solid rgba(255,217,61,.2);border-left:4px solid var(--gold);border-radius:var(--radius);padding:18px 22px;margin:14px 0}
+.reader .example-box p{margin:5px 0;font-size:14px}
+.reader .exam-tip{background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(0,229,255,.05));border:1px solid rgba(124,58,237,.2);border-radius:var(--radius);padding:14px 18px;margin:14px 0;font-size:14px;display:flex;align-items:flex-start;gap:10px}
+.reader .exam-tip i{color:var(--violet);font-size:18px;margin-top:1px}
+.reader .code-block{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 18px;font-family:'SF Mono',monospace;font-size:13px;line-height:1.8;overflow-x:auto;margin:12px 0}
+.reader .introduction p{margin:5px 0;line-height:1.8}
+.reader .introduction p:last-child{color:var(--muted);font-style:italic;font-size:14px}
+.reader .true-label{color:#00E676;font-weight:700}
+
+/* ===== ACCORDION ===== */
+.acc-item{border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;background:var(--card)}
+.acc-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;font-weight:600;font-size:15px;color:var(--cyan);user-select:none;-webkit-tap-highlight-color:transparent}
+.acc-header:active{background:rgba(0,229,255,.05)}
+.acc-header i{transition:transform .3s;font-size:13px;color:var(--muted)}
+.acc-item.open .acc-header i{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.acc-body>*{padding:0 18px 14px}
+.acc-body p,.acc-body pre{margin:7px 0;font-size:14px;line-height:1.7}
+
+/* ===== FLASHCARDS ===== */
+.fc-wrap{max-width:380px;margin:2rem auto;text-align:center}
+.fc-count{font-size:14px;color:var(--muted);margin-bottom:12px}
+.fc-card-wrap{perspective:1000px;margin-bottom:18px;cursor:pointer}
+.fc-card{position:relative;width:100%;height:220px;transition:transform .6s;transform-style:preserve-3d;border-radius:var(--radius)}
+.fc-card.flipped{transform:rotateY(180deg)}
+.fc-front,.fc-back{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;border-radius:var(--radius);padding:24px}
+.fc-front{background:linear-gradient(135deg,var(--cyan),var(--violet));color:#fff;font-size:44px;font-weight:800;font-family:var(--heading)}
+.fc-back{background:var(--surface);border:1px solid var(--border);transform:rotateY(180deg);gap:8px}
+.fc-back-row{font-size:18px}
+.fc-back-row strong{color:var(--gold)}
+.fc-nav{display:flex;gap:10px;justify-content:center}
+.fc-btn{padding:10px 20px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);cursor:pointer;font-size:14px;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.fc-btn:active{border-color:var(--cyan);background:rgba(0,229,255,.08)}
+.fc-flip-btn{background:var(--grad);color:#fff;border:none}
+.fc-flip-btn:active{opacity:.85}
+
+/* ===== QUIZ ===== */
+.quiz-q{font-size:17px;font-weight:600;text-align:center;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:18px}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{padding:14px 18px;border:1px solid var(--border);border-radius:8px;background:var(--surface);cursor:pointer;font-size:15px;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.quiz-opt:active{border-color:var(--cyan)}
+.quiz-opt.correct{background:rgba(0,229,255,.12);border-color:var(--cyan)}
+.quiz-opt.wrong{background:rgba(255,107,157,.12);border-color:var(--pink)}
+.quiz-fb{display:none;padding:14px;border-radius:8px;margin-top:14px;font-weight:600;text-align:center;font-size:14px}
+.quiz-fb.show{display:block;background:rgba(0,229,255,.1);border:1px solid var(--cyan)}
+.quiz-score{font-size:36px;font-weight:800;text-align:center;color:var(--gold);padding:36px}
+.quiz-nav{text-align:center;margin-top:16px}
+.quiz-btn{padding:12px 28px;background:var(--grad);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:15px;font-weight:600;font-family:var(--font)}
+.quiz-btn:active{opacity:.85}
+
+/* ===== SECTION FOOTER ===== */
+.sf-nav{display:flex;gap:10px;margin:24px 0}
+.sf-btn{flex:1;padding:14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);cursor:pointer;transition:border-color .15s;-webkit-tap-highlight-color:transparent}
+.sf-btn:active{border-color:var(--cyan)}
+.sf-btn .sf-dir{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.sf-btn .sf-tit{font-weight:600;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
+.sf-btn.sf-next .sf-tit{color:var(--cyan)}
+.sf-complete-row{text-align:center;margin:20px 0}
+.sf-complete{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border:1px solid var(--border);border-radius:20px;background:var(--card);cursor:pointer;font-size:15px;transition:all .3s}
+.sf-complete:active{border-color:var(--cyan)}
+.sf-complete.done{border-color:var(--cyan);background:rgba(0,229,255,.08)}
+.sf-complete.done i{color:var(--cyan)}
+
+/* ===== BOOT OVERLAY ===== */
+.boot-overlay{position:fixed;inset:0;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .8s ease}
+.boot-overlay.fade{opacity:0;pointer-events:none}
+.boot-terminal{font-family:'SF Mono','Menlo','Consolas',monospace;font-size:14px;line-height:1.9;color:#00E5FF;width:90%;max-width:700px;padding:20px;text-shadow:0 0 6px rgba(0,229,255,.3)}
+.boot-line{opacity:0;transform:translateY(8px);animation:bootIn .4s ease forwards;margin:2px 0}
+.boot-line.boot-error{color:#FF6B9D}
+.boot-line .bt-prompt{color:#00E5FF;font-weight:700;margin-right:8px}
+.boot-line .bt-err{color:#FF6B9D}
+.boot-line .bt-err-text{color:#FF6B9D;text-shadow:0 0 8px rgba(255,107,157,.4)}
+.boot-line.boot-warn{color:#FFD93D}
+.boot-line.boot-warn .bt-prompt{color:#FFD93D}
+.boot-line .bt-ok-text{color:#00E676;text-shadow:0 0 8px rgba(0,230,118,.4)}
+.boot-line.boot-credit{text-align:center;margin-top:10px;padding:0;border:none;background:none}
+.boot-line.boot-credit::after{content:"";display:none}
+.boot-logo{text-align:center;margin-top:0;opacity:0;animation:logoReveal 1s ease forwards;padding:8px 0 12px}
+.boot-logo .bl-icon{font-size:48px;background:linear-gradient(135deg,#FFD93D,#FF6B9D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:6px;filter:drop-shadow(0 0 12px rgba(255,217,61,.3))}
+.boot-logo .bl-name{font-family:var(--heading);font-size:22px;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,#FFD93D,#FF6B9D,#00E5FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1.3}
+.boot-logo .bl-title{font-size:12px;color:var(--muted);letter-spacing:4px;text-transform:uppercase;margin-top:4px;display:block;font-weight:600}
+.boot-logo .bl-line{width:120px;height:2px;margin:8px auto;background:linear-gradient(90deg,transparent,#FFD93D,transparent);border-radius:1px}
+@keyframes bootIn{to{opacity:1;transform:translateY(0)}}
+@keyframes logoReveal{0%{opacity:0;transform:scale(.85)}100%{opacity:1;transform:scale(1)}}
+
+/* ===== OVERLAY (iPad Portrait) ===== */
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90;display:none;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.sidebar-overlay.show{display:block}
+
+/* ===== TOAST ===== */
+.toast-con{position:fixed;top:60px;left:50%;transform:translateX(-50%);z-index:200;pointer-events:none}
+.toast{padding:12px 24px;border-radius:10px;background:var(--surface);border:1px solid var(--border);font-size:14px;display:flex;align-items:center;gap:8px;pointer-events:auto;animation:fadeIn .3s ease;max-width:400px}
+.toast.removing{animation:fadeOut .25s ease forwards}
+.toast-s{border-color:var(--cyan);background:rgba(0,229,255,.1)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-12px)}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);transition:transform .3s ease;z-index:99;box-shadow:0 0 40px rgba(0,0,0,.4)}
+  .sidebar.open{transform:translateX(0)}
+  .topbar .tb-menu{display:flex}
+  .content{padding:16px}
+  .chapter-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:500px){
+  .chapter-grid{grid-template-columns:1fr}
+  .db-stats{flex-direction:column}
+  .db-hero h1{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== BOOT OVERLAY ===== -->
+<div class="boot-overlay" id="bootOverlay">
+<div class="boot-terminal" id="bootTerminal">
+<div class="boot-line" data-delay="200"><span class="bt-prompt">[BOOT]</span> Initializing study environment...</div>
+<div class="boot-line" data-delay="500"><span class="bt-prompt">[SYS]</span> Loading core modules...</div>
+<div class="boot-line" data-delay="800"><span class="bt-prompt">[SYS]</span> Mounting BAC English Exam Guide v3.2...</div>
+
+<div class="boot-line boot-error" data-delay="1200"><span class="bt-prompt bt-err">[ERR]</span> <span class="bt-err-text">⚠ BAC ENGLISH EXAM GUIDE — ENTRY CORRUPTED</span></div>
+<div class="boot-line boot-error" data-delay="1600"><span class="bt-prompt bt-err">[ERR]</span> <span class="bt-err-text">CRC mismatch at 0x00A4 — guide entry invalid</span></div>
+<div class="boot-line" data-delay="2000"><span class="bt-prompt">[SYS]</span> Running integrity scan...</div>
+<div class="boot-line boot-error" data-delay="2400"><span class="bt-prompt bt-err">[ERR]</span> <span class="bt-err-text">FATAL: BAC ENGLISH EXAM GUIDE cannot be verified</span></div>
+<div class="boot-line" data-delay="2800"><span class="bt-prompt">[SYS]</span> Initializing repair protocol...</div>
+<div class="boot-line boot-error" data-delay="3200"><span class="bt-prompt bt-err">[ERR]</span> <span class="bt-err-text">Entry damaged — retry 1/3 failed</span></div>
+<div class="boot-line boot-error" data-delay="3600"><span class="bt-prompt bt-err">[ERR]</span> <span class="bt-err-text">Entry damaged — retry 2/3 failed</span></div>
+<div class="boot-line boot-warn" data-delay="4000"><span class="bt-prompt">[WARN]</span> Deploying backup restoration protocol...</div>
+<div class="boot-line boot-error" data-delay="4400"><span class="bt-prompt bt-err">[ERR]</span> <span class="bt-err-text">Entry damaged — retry 3/3 failed</span></div>
+<div class="boot-line" data-delay="4800"><span class="bt-prompt">[SYS]</span> Activating deep recovery mode...</div>
+<div class="boot-line" data-delay="5200"><span class="bt-prompt">[SYS]</span> Bypassing corrupted entry — rebuilding from secure source...</div>
+<div class="boot-line boot-warn" data-delay="5600"><span class="bt-prompt">[WARN]</span> Checksum override applied — sector 0xFF recovered</div>
+
+<div class="boot-line" data-delay="6100"><span class="bt-prompt">[OK]</span> <span class="bt-ok-text">BAC ENGLISH EXAM GUIDE — entry successfully restored</span></div>
+<div class="boot-line" data-delay="6500"><span class="bt-prompt">[OK]</span> Guide integrity verified — all modules operational</div>
+<div class="boot-line" data-delay="6900"><span class="bt-prompt">[BOOT]</span> System ready. Loading interface...</div>
+
+<div class="boot-line boot-credit" data-delay="7400"></div>
+<div class="boot-logo" data-delay="7400">
+<span class="bl-icon"><i class="fas fa-crown"></i></span>
+<div class="bl-line"></div>
+<span class="bl-name">ABDELHAMID HAJI</span>
+<span class="bl-title">CID LEADER</span>
+<div class="bl-line"></div>
+</div>
+</div>
+</div>
+
+<div class="sidebar-overlay" id="sbOverlay" onclick="closeSidebar()"></div>
+
+<aside class="sidebar" id="sidebar">
+<div class="sb-header" onclick="showDashboard()">
+<div class="sb-icon"><i class="fas fa-feather-alt"></i></div>
+<div class="sb-brand">BAC ENGLISH</div>
+<span class="sb-flag">🇲🇦</span>
+</div>
+<div class="sb-search">
+<i class="fas fa-search"></i>
+<input type="text" id="sbSearch" placeholder="Search..." oninput="filterSidebar(this.value)">
+</div>
+<nav class="sb-nav" id="sbNav"></nav>
+</aside>
+
+<main class="main">
+<header class="topbar">
+<button class="tb-menu" id="menuBtn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+<div class="tb-bc">
+<span class="bc-home" onclick="showDashboard()"><i class="fas fa-home"></i></span>
+<span class="bc-sep"><i class="fas fa-chevron-right"></i></span>
+<span class="bc-cur" id="bcCur">Home</span>
+</div>
+<div class="tb-actions">
+<button class="tb-btn" onclick="toggleTheme()" id="btnTheme"><i class="fas fa-moon"></i></button>
+</div>
+</header>
+<div class="content" id="content"></div>
+</main>
+
+<div class="toast-con" id="toastCon"></div>
+
+<script>
+// ===== SECTIONS =====
+const SECTIONS=[
+{id:"comprehension",type:"chapter",title:"Comprehension (الفهم)",icon:"fa-brain"},
+{id:"comp-overview",type:"section",title:"Overview & Strategies",parent:"comprehension"},
+{id:"comp-tf",type:"section",title:"True / False + Justify",parent:"comprehension"},
+{id:"comp-questions",type:"section",title:"Answer Open Questions",parent:"comprehension"},
+{id:"comp-complete",type:"section",title:"Complete Sentences",parent:"comprehension"},
+{id:"comp-reference",type:"section",title:"Word Reference",parent:"comprehension"},
+{id:"comp-synonyms",type:"section",title:"Synonyms, Title & More",parent:"comprehension"},
+{id:"grammar",type:"chapter",title:"Grammar (القواعد)",icon:"fa-book"},
+{id:"tenses",type:"section",title:"All 8 Tenses",parent:"grammar"},
+{id:"passive",type:"section",title:"Passive Voice",parent:"grammar"},
+{id:"reported",type:"section",title:"Reported Speech",parent:"grammar"},
+{id:"conditionals",type:"section",title:"Conditionals & Wish",parent:"grammar"},
+{id:"modals",type:"section",title:"Modal Verbs",parent:"grammar"},
+{id:"relative",type:"section",title:"Relative Pronouns",parent:"grammar"},
+{id:"purpose",type:"section",title:"Purpose Expressions",parent:"grammar"},
+{id:"gerund",type:"section",title:"Gerund & Infinitive",parent:"grammar"},
+{id:"linking",type:"section",title:"Linking Words",parent:"grammar"},
+{id:"phrasal",type:"section",title:"Phrasal Verbs (43)",parent:"grammar"},
+{id:"functions",type:"section",title:"Language Functions (18)",parent:"grammar"},
+{id:"writing",type:"chapter",title:"Writing Guide (التعبير)",icon:"fa-pen"},
+{id:"writing-overview",type:"section",title:"Writing Overview",parent:"writing"},
+{id:"writing-causes",type:"section",title:"Causes & Solutions",parent:"writing"},
+{id:"writing-adv",type:"section",title:"Advantages & Disadv.",parent:"writing"},
+{id:"writing-informal",type:"section",title:"Informal Email/Letter",parent:"writing"},
+{id:"writing-formal",type:"section",title:"Formal Email/Letter",parent:"writing"},
+{id:"writing-person",type:"section",title:"Describe a Person",parent:"writing"},
+{id:"writing-place",type:"section",title:"Describe a Place",parent:"writing"},
+{id:"writing-report",type:"section",title:"A Report",parent:"writing"},
+{id:"writing-film",type:"section",title:"Film Review",parent:"writing"},
+{id:"writing-book",type:"section",title:"Book Review",parent:"writing"},
+{id:"verbs",type:"chapter",title:"Irregular Verbs",icon:"fa-table"},
+{id:"irregular-verbs",type:"section",title:"100 Irregular Verbs",parent:"verbs"},
+{id:"flashcards",type:"section",title:"Interactive Flashcards",parent:"verbs"},
+{id:"vocabulary",type:"chapter",title:"Vocabulary (المفردات)",icon:"fa-font"},
+{id:"vocab-unit1",type:"section",title:"Unit 1: Education",parent:"vocabulary"},
+{id:"vocab-unit2",type:"section",title:"Unit 2: Immigration",parent:"vocabulary"},
+{id:"vocab-unit3",type:"section",title:"Unit 3: Human Rights",parent:"vocabulary"},
+{id:"vocab-unit4",type:"section",title:"Unit 4: Women & Society",parent:"vocabulary"},
+{id:"vocab-unit5",type:"section",title:"Unit 5: Charity & Volunteering",parent:"vocabulary"},
+{id:"vocab-unit6",type:"section",title:"Unit 6: Internet & Technology",parent:"vocabulary"},
+{id:"vocab-unit7",type:"section",title:"Unit 7: Health & Sports",parent:"vocabulary"},
+{id:"vocab-unit8",type:"section",title:"Unit 8: Entertainment",parent:"vocabulary"},
+{id:"vocab-unit9",type:"section",title:"Unit 9: Economy",parent:"vocabulary"},
+{id:"vocab-unit10",type:"section",title:"Unit 10: Citizenship",parent:"vocabulary"},
+{id:"strategy-chapter",type:"chapter",title:"Exam Strategy",icon:"fa-trophy"},
+{id:"strategy",type:"section",title:"BAC Exam Strategy",parent:"strategy-chapter"},
+{id:"mistakes",type:"section",title:"20 Common Mistakes",parent:"strategy-chapter"},
+{id:"study-plan",type:"section",title:"10-Day Study Plan",parent:"strategy-chapter"},
+{id:"quiz",type:"section",title:"Practice Quiz",parent:"strategy-chapter"},
+{id:"exams",type:"chapter",title:"National Exams",icon:"fa-file-alt"},
+{id:"corrections",type:"section",title:"Answer Keys & Corrections",parent:"exams"},
+{id:"national-exams",type:"section",title:"National Exam Samples",parent:"exams"},
+{id:"bonus",type:"chapter",title:"Bonus (إضافات)",icon:"fa-gem"},
+{id:"proverbs",type:"section",title:"Proverbs, Slang & More",parent:"bonus"},
+];
+const CHS=SECTIONS.filter(s=>s.type==="chapter");
+const CH_IDS=CHS.map(s=>s.id);
+const getSecs=(ch)=>SECTIONS.filter(s=>s.parent===ch);
+const getTit=(id)=>{const s=SECTIONS.find(x=>x.id===id);return s?s.title:""};
+const getPar=(id)=>{const s=SECTIONS.find(x=>x.id===id);return s?s.parent:null};
+const getCh=(id)=>CHS.find(x=>x.id===id);
+
+// ===== STATE =====
+let html="",curId=null;
+let theme=localStorage.getItem("i_theme")||"dark";
+function getC(){try{return JSON.parse(localStorage.getItem("i_comp")||"[]")}catch(e){return[]}}
+function setC(l){localStorage.setItem("i_comp",JSON.stringify(l))}
+function isC(id){return getC().includes(id)}
+function toggleC(id){let l=getC();if(l.includes(id))l=l.filter(x=>x!==id);else l.push(id);setC(l);return l.includes(id)}
+function chCnt(ch){return getSecs(ch).filter(x=>isC(x.id)).length}
+function chPct(ch){const s=getSecs(ch);return s.length?Math.round((chCnt(ch)/s.length)*100):0}
+function nextId(id){const s=SECTIONS.find(x=>x.id===id);if(!s||!s.parent)return null;const ss=getSecs(s.parent);const i=ss.findIndex(x=>x.id===id);if(i>=0&&i<ss.length-1)return ss[i+1].id;return null}
+function prevId(id){const s=SECTIONS.find(x=>x.id===id);if(!s||!s.parent)return null;const ss=getSecs(s.parent);const i=ss.findIndex(x=>x.id===id);if(i>0)return ss[i-1].id;return null}
+
+// ===== BOOT SEQUENCE =====
+(function boot(){
+  const lines=document.querySelectorAll(".boot-line");
+  let maxDelay=0;
+  lines.forEach(el=>{
+    const d=parseInt(el.dataset.delay)||0;
+    el.style.animationDelay=d+"ms";
+    if(d>maxDelay)maxDelay=d;
+  });
+  const credit=document.querySelector(".boot-credit");
+  const logo=document.querySelector(".boot-logo");
+  if(credit){
+    credit.style.animationDelay=maxDelay+"ms";
+  }
+  if(logo){
+    logo.style.animationDelay=maxDelay+"ms";
+  }
+  const finalDelay=maxDelay+2600;
+  setTimeout(()=>{
+    document.getElementById("bootOverlay").classList.add("fade");
+    setTimeout(()=>{
+      document.getElementById("bootOverlay").style.display="none";
+      document.documentElement.setAttribute("data-theme",theme);
+      if(theme==="light")document.getElementById("btnTheme").innerHTML='<i class="fas fa-sun"></i>';
+      loadContent();
+    },800);
+  },finalDelay);
+})();
+
+async function loadContent(){
+  try{
+    const r=await fetch("bac-english-complete.html");
+    html=await r.text();
+    html=html.replace(/<script[\s\S]*?<\/script>/gi,"");
+    buildSidebar();
+    showDashboard()
+  }catch(e){
+    document.getElementById("content").innerHTML=`<div style="text-align:center;padding:60px 20px;color:var(--muted)"><i class="fas fa-exclamation-triangle" style="font-size:48px;margin-bottom:14px;color:var(--gold)"></i><p style="font-size:16px;font-weight:600">Could not load guide.</p><p style="font-size:14px;margin-top:6px">Make sure <strong>bac-english-complete.html</strong> is in this folder.</p></div>`;
+  }
+}
+
+// ===== SIDEBAR =====
+function buildSidebar(filter){
+  const nav=document.getElementById("sbNav");
+  if(!filter){
+    nav.innerHTML=CHS.map(ch=>{
+      const ss=getSecs(ch.id);
+      return `<div class="sb-chapter"><i class="fas ${ch.icon}" style="margin-right:6px;color:var(--cyan)"></i>${ch.title}</div>
+      ${ss.map(s=>`<div class="sb-item" id="sb-${s.id}" onclick="showSection('${s.id}');closeSidebar()">
+        <span class="sb-dot"></span>
+        <span class="sb-tt">${s.title}</span>
+        <span class="sb-check ${isC(s.id)?'show':''}"><i class="fas fa-check"></i></span>
+      </div>`).join("")}`;
+    }).join("");
+  } else {
+    const q=filter.toLowerCase();
+    const items=SECTIONS.filter(s=>s.type==="section"&&s.title.toLowerCase().includes(q));
+    if(!items.length){nav.innerHTML=`<div style="padding:20px;text-align:center;color:var(--muted);font-size:14px">No results</div>`;return}
+    nav.innerHTML=items.map(s=>`<div class="sb-item" onclick="showSection('${s.id}');closeSidebar()">
+      <span class="sb-tt">${s.title}</span>
+    </div>`).join("");
+  }
+}
+function filterSidebar(v){buildSidebar(v.trim().toLowerCase())}
+function toggleSidebar(){document.getElementById("sidebar").classList.toggle("open");document.getElementById("sbOverlay").classList.toggle("show")}
+function closeSidebar(){document.getElementById("sidebar").classList.remove("open");document.getElementById("sbOverlay").classList.remove("show")}
+
+function updateSb(){
+  SECTIONS.filter(s=>s.type==="section").forEach(s=>{
+    const el=document.getElementById("sb-"+s.id);
+    if(!el)return;
+    el.classList.toggle("active",s.id===curId);
+    const ck=el.querySelector(".sb-check");
+    if(ck)ck.classList.toggle("show",isC(s.id));
+  });
+}
+
+// ===== DASHBOARD =====
+function showDashboard(){
+  curId=null;
+  document.getElementById("bcCur").textContent="Home";
+  const ss=SECTIONS.filter(s=>s.type==="section");
+  const total=ss.length,done=getC().length;
+  const last=localStorage.getItem("i_last");
+  let cont="";
+  if(last){const ls=SECTIONS.find(x=>x.id===last);if(ls&&ls.parent){const pt=getCh(ls.parent);cont=`<div class="db-continue" onclick="showSection('${ls.id}')"><div class="dc-icon"><i class="fas fa-play-circle"></i></div><div class="dc-info"><div class="dc-lbl">Continue</div><div class="dc-title">${ls.title}</div><div class="dc-ch">${pt?pt.title:""}</div></div><i class="fas fa-chevron-right" style="color:var(--muted)"></i></div>`}}
+  document.getElementById("content").innerHTML=`
+    <div class="db-hero"><div class="db-icon"><i class="fas fa-graduation-cap"></i></div><h1>BAC ENGLISH</h1><div class="db-sub">Complete Study Guide for Moroccan Baccalaureate</div></div>
+    ${cont}
+    <div class="db-stats"><div class="db-stat"><span class="ds-num">${total}</span><span class="ds-lbl">Lessons</span></div><div class="db-stat"><span class="ds-num">${done}/${total}</span><span class="ds-lbl">Completed</span></div><div class="db-stat violet"><span class="ds-num">${Math.round(done/total*100)}%</span><span class="ds-lbl">Progress</span></div></div>
+    <div class="db-title"><i class="fas fa-book-open"></i> Your Learning Path</div>
+    <div class="chapter-grid">${CHS.map(s=>{const p=chPct(s.id);return `<div class="ch-card" onclick="showChapter('${s.id}')"><div class="ch-icon"><i class="fas ${s.icon}"></i></div><div class="ch-name">${s.title}</div><div class="ch-count">${chCnt(s.id)}/${getSecs(s.id).length} lessons</div><div class="ch-bar"><div class="ch-fill" style="width:${p}%"></div></div></div>`}).join("")}</div>`;
+  updateSb();
+}
+
+// ===== CHAPTER =====
+function showChapter(id){
+  curId=id;
+  localStorage.setItem("i_last",id);
+  const ch=getCh(id);const ss=getSecs(id);
+  const d=chCnt(id),t=ss.length,p=chPct(id);
+  document.getElementById("bcCur").textContent=ch?ch.title:"";
+  document.getElementById("content").innerHTML=`
+    <div class="ch-module">
+    <div class="ch-head"><h2>${ch?ch.title:""}</h2><div class="ch-sub">${t} lessons · ${d} completed</div>
+    <div class="ch-prog"><div class="ch-bar2"><div class="ch-fill2" style="width:${p}%"></div></div><span class="ch-pct">${p}%</span></div></div>
+    <div class="lesson-list">${ss.map(x=>{const c=isC(x.id);return `<div class="lesson-item" onclick="showSection('${x.id}')"><div class="li-status ${c?'done':''}">${c?'<i class="fas fa-check"></i>':''}</div><div class="li-info"><div class="li-title">${x.title}</div><div class="li-meta">${c?'Completed':'Click to start'}</div></div><div class="li-arrow"><i class="fas fa-chevron-right"></i></div></div>`}).join("")}</div>
+    </div>`;
+  updateSb();
+}
+
+// ===== SECTION =====
+function showSection(id){
+  curId=id;
+  localStorage.setItem("i_last",id);
+  if(CH_IDS.includes(id)){showChapter(id);return}
+  const s=SECTIONS.find(x=>x.id===id);
+  const secHtml=extractSec(id);
+  if(!secHtml){document.getElementById("content").innerHTML=`<div style="text-align:center;padding:60px;color:var(--muted)"><i class="fas fa-file" style="font-size:40px;margin-bottom:10px"></i><p>Section not found</p></div>`;return}
+  const pt=s&&s.parent?getCh(s.parent)?.title:"";
+  document.getElementById("bcCur").textContent=s?s.title:"";
+  const c=isC(id),n=nextId(id),p=prevId(id);
+  document.getElementById("content").innerHTML=`
+    <div class="reader">
+    <div style="font-size:12px;color:var(--muted);margin-bottom:4px"><i class="fas fa-book"></i> ${pt||""}</div>
+    <h2>${s?s.title:""}</h2>
+    ${secHtml}
+    <div class="sf-nav">${p?`<div class="sf-btn" onclick="showSection('${p}')"><div class="sf-dir">Previous</div><div class="sf-tit">${getTit(p)}</div></div>`:''}${n?`<div class="sf-btn sf-next" onclick="showSection('${n}')"><div class="sf-dir">Next</div><div class="sf-tit">${getTit(n)}</div></div>`:''}</div>
+    <div class="sf-complete-row"><div class="sf-complete ${c?'done':''}" onclick="markComp('${id}')"><i class="fas ${c?'fa-check-circle':'fa-circle'}"></i><span>${c?'Completed':'Mark Complete'}</span></div></div>
+    </div>`;
+  document.getElementById("content").scrollTop=0;
+  updateSb();
+}
+
+function extractSec(id){
+  if(!html)return null;
+  const r=new RegExp(`<div[^>]*id=["']page-${id}["'][^>]*>([\\s\\S]*?)<\\/div>\\s*(?:<div[^>]*id=["']page-|$)`);
+  const m=html.match(r);
+  return m?m[1]:null;
+}
+
+function markComp(id){
+  const n=toggleC(id);
+  toast(n?"Completed!":"Unmarked",n);
+  if(n)createConfetti(30);
+  showSection(id);
+}
+
+// ===== THEME =====
+function toggleTheme(){
+  const h=document.documentElement;
+  theme=theme==="dark"?"light":"dark";
+  h.setAttribute("data-theme",theme);
+  localStorage.setItem("i_theme",theme);
+  document.getElementById("btnTheme").innerHTML=theme==="dark"?'<i class="fas fa-moon"></i>':'<i class="fas fa-sun"></i>';
+  if(theme==="light")document.querySelector('meta[name="theme-color"]').setAttribute("content","#EDF0F8");
+  else document.querySelector('meta[name="theme-color"]').setAttribute("content","#080B1A");
+}
+
+// ===== TOAST =====
+function toast(msg,ok){
+  const c=document.getElementById("toastCon");
+  const t=document.createElement("div");
+  t.className="toast"+(ok?" toast-s":"");
+  t.innerHTML=`<i class="fas ${ok?"fa-check-circle":"fa-info-circle"}" style="color:${ok?"var(--cyan)":"var(--muted)"}"></i> ${msg}`;
+  c.appendChild(t);
+  setTimeout(()=>{t.classList.add("removing");setTimeout(()=>t.remove(),250)},2500);
+}
+
+// ===== CONFETTI =====
+function createConfetti(n){
+  const colors=["#FFD93D","#00E5FF","#FF6B9D","#7C3AED"];
+  for(let i=0;i<n;i++){
+    const e=document.createElement("div");
+    e.style.cssText=`position:fixed;left:${Math.random()*100}%;top:-10px;background:${colors[i%4]};width:${6+Math.random()*6}px;height:${6+Math.random()*6}px;border-radius:${Math.random()>.5?"50%":"2px"};z-index:999;pointer-events:none;animation:cf${i%4} ${2+Math.random()*2}s ease-out forwards;animation-delay:${Math.random()*.3}s`;
+    const s=document.createElement("style");
+    s.textContent=`@keyframes cf${i%4}{to{transform:translateY(100vh) rotate(${360+Math.random()*720}deg);opacity:0}}`;
+    document.head.appendChild(s);
+    document.body.appendChild(e);
+    setTimeout(()=>{e.remove();s.remove()},4000);
+  }
+}
+
+// ===== ACCORDION =====
+function toggleAcc(el){
+  const item=el.closest(".acc-item");
+  if(!item)return;item.classList.toggle("open");
+  const b=item.querySelector(".acc-body");
+  if(!b)return;
+  b.style.maxHeight=item.classList.contains("open")?b.scrollHeight+"px":"0";
+}
+
+// ===== FLASHCARDS =====
+const fcW=[{b:"be",p:"was/were",pp:"been",d:"يكون"},{b:"begin",p:"began",pp:"begun",d:"يبدا"},{b:"break",p:"broke",pp:"broken",d:"يكسر"},{b:"bring",p:"brought",pp:"brought",d:"يجيب"},{b:"buy",p:"bought",pp:"bought",d:"يشري"},{b:"choose",p:"chose",pp:"chosen",d:"يختار"},{b:"come",p:"came",pp:"come",d:"يجي"},{b:"do",p:"did",pp:"done",d:"يدير"},{b:"drink",p:"drank",pp:"drunk",d:"يشرب"},{b:"drive",p:"drove",pp:"driven",d:"يقود"},{b:"eat",p:"ate",pp:"eaten",d:"ياكل"},{b:"feel",p:"felt",pp:"felt",d:"يحس"},{b:"find",p:"found",pp:"found",d:"يلقى"},{b:"fly",p:"flew",pp:"flown",d:"يطير"},{b:"forget",p:"forgot",pp:"forgotten",d:"ينسى"},{b:"give",p:"gave",pp:"given",d:"يعطي"},{b:"go",p:"went",pp:"gone",d:"يمشي"},{b:"grow",p:"grew",pp:"grown",d:"يكبر"},{b:"know",p:"knew",pp:"known",d:"يعرف"},{b:"make",p:"made",pp:"made",d:"يصنع"}];
+let fcI=0,fcF=false;
+function showFc(i){
+  const w=fcW[i];
+  const g=id=>document.getElementById(id);
+  g("fcWord")&&(g("fcWord").textContent=w.b);g("fcPast")&&(g("fcPast").textContent=w.p);g("fcPp")&&(g("fcPp").textContent=w.pp);g("fcDz")&&(g("fcDz").textContent=w.d);
+  g("fcCard")&&g("fcCard").classList.remove("flipped");g("fcCount")&&(g("fcCount").textContent=(i+1)+"/"+fcW.length);
+  fcI=i;fcF=false;
+}
+function flipFc(){fcF=!fcF;const c=document.getElementById("fcCard");c&&c.classList.toggle("flipped")}
+function nextFc(){fcI<fcW.length-1&&showFc(fcI+1)}
+function prevFc(){fcI>0&&showFc(fcI-1)}
+
+// ===== QUIZ =====
+const qD=[{q:'What tense uses "yesterday"?',o:["Simple Present","Simple Past","Present Perfect","Future"],a:1},{q:'Passive: "The book ___ by him."',o:["was written","wrote","is writing","has wrote"],a:0},{q:'Report: "I am happy" → He said he ___ happy.',o:["is","was","has been","will be"],a:1},{q:'Conditional 2: "If I ___ rich, I would travel."',o:["was","were","am","will be"],a:1},{q:'"Although" expresses:',o:["Addition","Contrast","Result","Purpose"],a:1},{q:'"Look after" means:',o:["Search","Take care of","Cancel","Invent"],a:1},{q:'Gerund: "I enjoy ___.',o:["to swim","swimming","swam","swim"],a:1},{q:'Modal passive: "It can ___ easily."',o:["be done","done","do","doing"],a:0},{q:'"She has lived here ___ 2010."',o:["for","since","ago","in"],a:1},{q:'"I wish I ___ studied harder."',o:["have","had","would","will"],a:1}];
+let qI=0,qSc=0,qAns=false;
+function loadQ(){const d=qD[qI];const qEl=document.getElementById("qText"),oEl=document.getElementById("qOpts"),fEl=document.getElementById("qFeed");if(qEl)qEl.textContent=d.q;if(oEl){oEl.innerHTML="";d.o.forEach((o,i)=>{const b=document.createElement("div");b.className="quiz-opt";b.textContent=o;b.onclick=()=>{if(qAns)return;qAns=true;const os=document.querySelectorAll("#qOpts .quiz-opt");os.forEach((x,j)=>{if(j===d.a)x.classList.add("correct");if(j===i&&i!==d.a)x.classList.add("wrong")});if(i===d.a)qSc++;const f=document.getElementById("qFeed");if(f){f.textContent=i===d.a?"Correct!":"Answer: "+d.o[d.a];f.style.display="block"}};oEl.appendChild(b)})}if(fEl){fEl.style.display="none"}qAns=false}
+function nextQ(){if(qI<qD.length-1){qI++;loadQ()}else{const w=document.getElementById("qWrap");if(w)w.innerHTML=`<div class="quiz-score">${qSc}/${qD.length}</div><p style="text-align:center;color:var(--muted)">Great job! Tap a chapter to continue.</p>`}}
+
+// ===== SERVICES =====
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js");
+</script>
+</body>
+</html>

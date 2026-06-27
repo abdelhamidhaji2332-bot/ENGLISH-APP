@@ -1,0 +1,14 @@
+{
+  "name": "BAC English Guide",
+  "short_name": "BAC English",
+  "description": "Complete BAC English study guide with grammar, vocabulary, writing, and exam prep",
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#080B1A",
+  "theme_color": "#080B1A",
+  "status_bar": "black-translucent",
+  "icons": [
+    { "src": "icon.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

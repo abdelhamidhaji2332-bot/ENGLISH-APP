@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00E5FF"/><stop offset="100%" stop-color="#7C3AED"/></linearGradient></defs>
+<rect width="512" height="512" rx="80" fill="#080B1A"/>
+<rect x="24" y="24" width="464" height="464" rx="64" fill="none" stroke="url(#g)" stroke-width="3"/>
+<text x="256" y="220" text-anchor="middle" font-family="serif" font-size="200" font-weight="900" fill="url(#g)">BAC</text>
+<text x="256" y="340" text-anchor="middle" font-family="sans-serif" font-size="72" font-weight="700" fill="#FFD93D">ENGLISH</text>
+</svg>

@@ -1,0 +1,30 @@
+{
+  "name": "falcon-bac-study",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  },
+  "description": "",
+  "main": "bdarija_content.js",
+  "dependencies": {
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/cli": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
+    "esbuild": "^0.21.5",
+    "nanoid": "^3.3.15",
+    "picocolors": "^1.1.1",
+    "postcss": "^8.5.15",
+    "rollup": "^4.62.2",
+    "source-map-js": "^1.2.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

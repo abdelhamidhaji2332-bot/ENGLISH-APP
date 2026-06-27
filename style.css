@@ -1,0 +1,90 @@
+/* ===== General styles for fetched HTML content ===== */
+body {
+  font-family: 'Inter', sans-serif;
+  background: #090A0F; /* Deep Space Obsidian */
+  color: #EAECEF; /* Primary Text */
+  line-height: 1.6;
+  padding: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+h1 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.08); /* Subtle border */
+  color: #EAECEF;
+}
+h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  margin: 30px 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
+  color: #EAECEF;
+}
+h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #A0A5B5;
+  margin: 25px 0 15px;
+  font-size: 20px;
+  font-weight: 600;
+}
+p { margin-bottom: 15px; font-size: 15px; }
+ul, ol { margin: 15px 0 15px 25px; }
+li { margin-bottom: 8px; font-size: 15px; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 20px 0;
+  background: rgba(18, 21, 32, 0.6); /* Glassmorphic background */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px; overflow: hidden;
+}
+th, td {
+  border: 1px solid rgba(255, 255, 255, 0.08); padding: 12px 18px; text-align: left;
+  color: #EAECEF;
+}
+th {
+  background: #0E101A; /* Darker surface */
+  color: #00F5D4; /* Aurora Teal */
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+}
+tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+
+code, .example { 
+  background: rgba(18, 21, 32, 0.6); /* Glassmorphic background */
+  backdrop-filter: blur(8px);
+  padding: 15px 20px;
+  border-radius: 10px; display: block; margin: 18px 0;
+  border-left: 4px solid #00F5D4; /* Aurora Teal accent */
+  font-family: 'SF Mono', 'Consolas', monospace;
+  font-size: 14px;
+  color: #EAECEF;
+}
+
+.darija {
+  color: #E6C280; /* Champagne Gold */
+  font-family: 'Cairo', sans-serif; /* Cairo for Arabic */
+  font-size: 0.95em;
+  line-height: 1.9; /* Increased line height for legibility */
+}
+strong { color: #E6C280; /* Champagne Gold for strong text */ }
+a { color: #00F5D4; text-decoration: none; }
+a:hover { text-decoration: underline; }
+hr { border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 30px 0; }
+
+@media (max-width: 600px) {
+  body { padding: 15px; }
+  h1 { font-size: 28px; margin-bottom: 20px; padding-bottom: 12px; }
+  h2 { font-size: 22px; margin: 25px 0 15px; padding-bottom: 8px; }
+  h3 { font-size: 18px; margin: 20px 0 10px; }
+  p, li { font-size: 14px; margin-bottom: 10px; }
+  table { font-size: 13px; border-radius: 8px; }
+  th, td { padding: 10px 15px; }
+  code, .example { padding: 12px 15px; border-radius: 8px; }
+}

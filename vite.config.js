@@ -13,6 +13,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         guide: resolve(__dirname, "bac-english-bdarija.html"),
+        forge: resolve(__dirname, "sentence-builder.html"),
       },
     },
   },

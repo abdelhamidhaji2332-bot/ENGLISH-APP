@@ -37,8 +37,8 @@ export const BDARIJA_SECTIONS = [
 
   // Chapter 4: Irregular Verbs
   { id: "verbs", type: "chapter", title: "Irregular Verbs (الأفعال الشاذة)", icon: "fa-table" },
-  { id: "irregular-verbs", type: "section", title: "100 Irregular Verbs", parent: "verbs" },
-  { id: "flashcards", type: "section", title: "Interactive Flashcards", parent: "verbs" },
+  { id: "irregular-verbs", type: "section", title: "118 Irregular Verbs", parent: "verbs" },
+  { id: "flashcards", type: "section", title: "Interactive Flashcards (20)", parent: "verbs" },
 
   // Chapter 5: Vocabulary
   { id: "vocabulary", type: "chapter", title: "Vocabulary (المفردات)", icon: "fa-font" },
@@ -70,4 +70,4 @@ export const BDARIJA_SECTIONS = [
   { id: "proverbs", type: "section", title: "Proverbs, Slang & More", parent: "bonus" },
 ];
 
-export const BDARIJA_SRC = "/bac-english-complete.html";
+export const BDARIJA_SRC = "./bac-english-complete.html";

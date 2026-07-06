@@ -1,19 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BAC English Complete Guide</title>
+  <title>BAC English — Study Guide</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- New Font Imports -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Noto+Kufi+Arabic:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="falcon-style.css" />
 </head>
 <body>
   <div id="bg-canvas"></div>
   <div id="confetti-container"></div>
   <div id="toast-container"></div>
-
   <div id="reading-progress"><div class="rp-fill"></div></div>
 
   <div id="boot-overlay">
@@ -21,26 +19,19 @@
       <div class="bt-line" data-delay="200"><span class="bt-pr">[BOOT]</span> Initializing study environment...</div>
       <div class="bt-line" data-delay="500"><span class="bt-pr">[SYS]</span> Loading core modules...</div>
       <div class="bt-line" data-delay="800"><span class="bt-pr">[SYS]</span> Mounting BAC English Exam Guide v3.2...</div>
-
-      <div class="bt-line bt-err" data-delay="1200"><span class="bt-pr bt-pr-err">[ERR]</span> <span class="bt-err-txt">⚠ BAC ENGLISH EXAM GUIDE — ENTRY CORRUPTED</span></div>
+      <div class="bt-line bt-err" data-delay="1200"><span class="bt-pr bt-pr-err">[ERR]</span> <span class="bt-err-txt">BAC ENGLISH EXAM GUIDE — ENTRY CORRUPTED</span></div>
       <div class="bt-line bt-err" data-delay="1600"><span class="bt-pr bt-pr-err">[ERR]</span> <span class="bt-err-txt">CRC mismatch at 0x00A4 — guide entry invalid</span></div>
       <div class="bt-line" data-delay="2000"><span class="bt-pr">[SYS]</span> Running integrity scan...</div>
       <div class="bt-line bt-err" data-delay="2400"><span class="bt-pr bt-pr-err">[ERR]</span> <span class="bt-err-txt">FATAL: BAC ENGLISH EXAM GUIDE cannot be verified</span></div>
       <div class="bt-line" data-delay="2800"><span class="bt-pr">[SYS]</span> Initializing repair protocol...</div>
-      <div class="bt-line bt-err" data-delay="3200"><span class="bt-pr bt-pr-err">[ERR]</span> <span class="bt-err-txt">Entry damaged — retry 1/3 failed</span></div>
-      <div class="bt-line bt-err" data-delay="3600"><span class="bt-pr bt-pr-err">[ERR]</span> <span class="bt-err-txt">Entry damaged — retry 2/3 failed</span></div>
-      <div class="bt-line bt-warn" data-delay="4000"><span class="bt-pr">[WARN]</span> Deploying backup restoration protocol...</div>
-      <div class="bt-line bt-err" data-delay="4400"><span class="bt-pr bt-pr-err">[ERR]</span> <span class="bt-err-txt">Entry damaged — retry 3/3 failed</span></div>
-      <div class="bt-line" data-delay="4800"><span class="bt-pr">[SYS]</span> Activating deep recovery mode...</div>
-      <div class="bt-line" data-delay="5200"><span class="bt-pr">[SYS]</span> Bypassing corrupted entry — rebuilding from secure source...</div>
-      <div class="bt-line bt-warn" data-delay="5600"><span class="bt-pr">[WARN]</span> Checksum override applied — sector 0xFF recovered</div>
-
-      <div class="bt-line bt-ok" data-delay="6100"><span class="bt-pr">[OK]</span> <span class="bt-ok-txt">BAC ENGLISH EXAM GUIDE — entry successfully restored</span></div>
-      <div class="bt-line bt-ok" data-delay="6500"><span class="bt-pr">[OK]</span> Guide integrity verified — all modules operational</div>
-      <div class="bt-line" data-delay="6900"><span class="bt-pr">[BOOT]</span> System ready. Loading interface...</div>
-
-      <div class="bt-credit" data-delay="7400"></div>
-      <div class="bt-logo" data-delay="7400">
+      <div class="bt-line bt-warn" data-delay="3200"><span class="bt-pr">[WARN]</span> Deploying backup restoration protocol...</div>
+      <div class="bt-line" data-delay="3800"><span class="bt-pr">[SYS]</span> Activating deep recovery mode...</div>
+      <div class="bt-line" data-delay="4200"><span class="bt-pr">[SYS]</span> Bypassing corrupted entry — rebuilding from secure source...</div>
+      <div class="bt-line bt-warn" data-delay="4600"><span class="bt-pr">[WARN]</span> Checksum override applied — sector 0xFF recovered</div>
+      <div class="bt-line bt-ok" data-delay="5100"><span class="bt-pr">[OK]</span> <span class="bt-ok-txt">BAC ENGLISH EXAM GUIDE — entry successfully restored</span></div>
+      <div class="bt-line bt-ok" data-delay="5500"><span class="bt-pr">[OK]</span> Guide integrity verified — all modules operational</div>
+      <div class="bt-line" data-delay="5900"><span class="bt-pr">[BOOT]</span> System ready. Loading interface...</div>
+      <div class="bt-logo" data-delay="6400">
         <span class="btl-icon"><i class="fas fa-crown"></i></span>
         <div class="btl-line"></div>
         <span class="btl-name">ABDELHAMID HAJI</span>
@@ -52,18 +43,21 @@
 
   <div id="app" style="display:none;">
     <div class="sidebar-overlay" id="sbOverlay" onclick="toggleSidebar()"></div>
+
     <aside id="sidebar">
       <div class="sidebar-header" onclick="showReader()">
-        <span class="sd-brand">BAC ENGLISH</span>
+        <span class="sd-logo"><i class="fas fa-graduation-cap"></i></span>
+        <div class="sd-brand-wrap">
+          <span class="sd-brand">BAC ENGLISH</span>
+          <span class="sd-sub">Study Guide</span>
+        </div>
         <span class="sd-flag">🇲🇦</span>
       </div>
       <div class="sd-search">
         <i class="fas fa-search"></i>
-        <input type="text" id="toc-search" placeholder="Search..." oninput="filterTOC(this.value)" />
+        <input type="text" id="toc-search" placeholder="Search topics..." oninput="filterTOC(this.value)" />
       </div>
-      <nav class="sidebar-nav" id="toc-list">
-        <!-- populated by initTOC() -->
-      </nav>
+      <nav class="sidebar-nav" id="toc-list"></nav>
     </aside>
 
     <main id="main-content">
@@ -74,18 +68,17 @@
           <span class="bc-sep"><i class="fas fa-chevron-right"></i></span>
           <span class="bc-current" id="view-title">Home</span>
         </div>
-        <!-- Toolbar Buttons -->
         <div class="tb-actions">
           <button class="tb-btn" id="btn-sfx" onclick="toggleSFX()" title="Toggle Sound"><i class="fas fa-volume-up"></i></button>
           <button class="tb-btn" id="btn-theme" onclick="toggleTheme()" title="Toggle Theme"><i class="fas fa-moon"></i></button>
           <div class="lang-switch" id="lang-switch" onclick="toggleLang()">
             <span class="lang-en">ENG</span>
-            <span class="lang-ar">AR</span>
+            <span class="lang-ar">ع</span>
           </div>
         </div>
       </header>
 
-      <section class="view-panel active" id="view-reader">
+      <section class="view-panel" id="view-reader">
         <div id="reader-content"></div>
       </section>
     </main>

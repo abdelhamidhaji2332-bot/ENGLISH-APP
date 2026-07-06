@@ -153,58 +153,103 @@ const VOCAB_UNITS = {
     ]
   },
   "unit3": {
-    title: "Unit 3: Environment & Ecology",
+    title: "Unit 3: Human Rights",
     words: [
-      { word: "pollution", meaning: "تلوث" },
-      { word: "deforestation", meaning: "إزالة الغابات" },
-      { word: "renewable", meaning: "متجدد" },
-      { word: "emissions", meaning: "انبعاثات" },
-      { word: "conservation", meaning: "حفظ" },
-      { word: "biodiversity", meaning: "تنوع بيولوجي" },
-      { word: "sustainable", meaning: "مستدام" },
-      { word: "ecosystem", meaning: "نظام بيئي" },
-      { word: "carbon footprint", meaning: "بصمة كربونية" },
-      { word: "global warming", meaning: "احتباس حراري" }
+      { word: "human rights", meaning: "حقوق الإنسان" },
+      { word: "equality", meaning: "مساواة" },
+      { word: "justice", meaning: "عدالة" },
+      { word: "freedom", meaning: "حرية" },
+      { word: "dignity", meaning: "كرامة" },
+      { word: "discrimination", meaning: "تمييز" },
+      { word: "oppression", meaning: "اضطهاد" },
+      { word: "tolerance", meaning: "تسامح" },
+      { word: "solidarity", meaning: "تضامن" },
+      { word: "advocacy", meaning: "مناصرة" }
     ]
   },
   "unit4": {
-    title: "Unit 4: Technology & Media",
+    title: "Unit 4: Women & Society",
     words: [
-      { word: "innovation", meaning: "ابتكار" },
-      { word: "artificial intelligence", meaning: "ذكاء اصطناعي" },
-      { word: "digital", meaning: "رقمي" },
-      { word: "cybersecurity", meaning: "أمن سيبراني" },
-      { word: "encryption", meaning: "تشفير" },
-      { word: "algorithm", meaning: "خوارزمية" },
-      { word: "social media", meaning: "وسائل التواصل" },
-      { word: "censorship", meaning: "رقابة" },
-      { word: "misinformation", meaning: "معلومات مضللة" },
-      { word: "privacy", meaning: "خصوصية" }
+      { word: "empowerment", meaning: "تمكين" },
+      { word: "gender", meaning: "جنس" },
+      { word: "patriarchy", meaning: "أبوي" },
+      { word: "feminism", meaning: "نسوية" },
+      { word: "equality", meaning: "مساواة" },
+      { word: "stereotype", meaning: "صورة نمطية" },
+      { word: "maternity", meaning: "أبوة" },
+      { word: "workforce", meaning: "قوة عمل" },
+      { word: "education", meaning: "تعليم" },
+      { word: "society", meaning: "مجتمع" }
     ]
   },
   "unit5": {
-    title: "Unit 5: Health & Wellness",
+    title: "Unit 5: Charity & Volunteering",
     words: [
-      { word: "nutrition", meaning: "تغذية" },
-      { word: "epidemic", meaning: "وباء" },
-      { word: "vaccination", meaning: "تطعيم" },
-      { word: "obesity", meaning: "سمنة" },
-      { word: "mental health", meaning: "صحة نفسية" },
-      { word: "therapy", meaning: "علاج" },
-      { word: "diagnosis", meaning: "تشخيص" },
-      { word: "hygiene", meaning: "نظافة" },
-      { word: "surgery", meaning: "جراحة" },
-      { word: "pharmacy", meaning: "صيدلية" }
+      { word: "charity", meaning: "خيرية" },
+      { word: "volunteer", meaning: "متطوع" },
+      { word: "donation", meaning: "تبرع" },
+      { word: "philanthropy", meaning: "إحسان" },
+      { word: "humanitarian", meaning: "إنساني" },
+      { word: "relief", meaning: "إغاثة" },
+      { word: "NGO", meaning: "منظمة غير حكومية" },
+      { word: "fundraiser", meaning: "جمع تبرعات" },
+      { word: "beneficiary", meaning: "مستفيد" },
+      { word: "solidarity", meaning: "تضامن" }
     ]
   },
   "unit6": {
-    title: "Unit 6: Economy & Development",
+    title: "Unit 6: Internet & Technology",
+    words: [
+      { word: "internet", meaning: "إنترنت" },
+      { word: "cyber", meaning: "سيبراني" },
+      { word: "software", meaning: "برمجيات" },
+      { word: "hardware", meaning: "عتاد" },
+      { word: "network", meaning: "شبكة" },
+      { word: "database", meaning: "قاعدة بيانات" },
+      { word: "website", meaning: "موقع إلكتروني" },
+      { word: "download", meaning: "تنزيل" },
+      { word: "upload", meaning: "رفع" },
+      { word: "streaming", meaning: "بث مباشر" }
+    ]
+  },
+  "unit7": {
+    title: "Unit 7: Health & Sports",
+    words: [
+      { word: "fitness", meaning: "لياقة" },
+      { word: "athletics", meaning: "ألعاب قوى" },
+      { word: "championship", meaning: "بطولة" },
+      { word: "training", meaning: "تدريب" },
+      { word: "nutrition", meaning: "تغذية" },
+      { word: "endurance", meaning: "تحمل" },
+      { word: "teamwork", meaning: "عمل جماعي" },
+      { word: "coach", meaning: "مدرب" },
+      { word: "stadium", meaning: "ملعب" },
+      { word: "medal", meaning: "ميدالية" }
+    ]
+  },
+  "unit8": {
+    title: "Unit 8: Entertainment",
+    words: [
+      { word: "cinema", meaning: "سينما" },
+      { word: "concert", meaning: "حفل موسيقي" },
+      { word: "festival", meaning: "مهرجان" },
+      { word: "theatre", meaning: "مسرح" },
+      { word: "museum", meaning: "متحف" },
+      { word: "gallery", meaning: "معرض" },
+      { word: "performance", meaning: "أداء" },
+      { word: "audience", meaning: "جمهور" },
+      { word: "rehearsal", meaning: "تداريب" },
+      { word: "broadcast", meaning: "بث" }
+    ]
+  },
+  "unit9": {
+    title: "Unit 9: Economy",
     words: [
       { word: "inflation", meaning: "تضخم" },
       { word: "recession", meaning: "ركود" },
       { word: "investment", meaning: "استثمار" },
       { word: "entrepreneurship", meaning: "مقاولة" },
-      { word: "gross domestic product", meaning: "ناتج محلي إجمالي" },
+      { word: "GDP", meaning: "ناتج محلي إجمالي" },
       { word: "unemployment", meaning: "بطالة" },
       { word: "subsidy", meaning: "دعم" },
       { word: "privatization", meaning: "خصخصة" },
@@ -212,64 +257,19 @@ const VOCAB_UNITS = {
       { word: "microfinance", meaning: "تمويل صغير" }
     ]
   },
-  "unit7": {
-    title: "Unit 7: Culture & Society",
-    words: [
-      { word: "heritage", meaning: "تراث" },
-      { word: "diversity", meaning: "تنوع" },
-      { word: "tolerance", meaning: "تسامح" },
-      { word: "discrimination", meaning: "تمييز" },
-      { word: "gender equality", meaning: "مساواة بين الجنسين" },
-      { word: "stereotype", meaning: "صورة نمطية" },
-      { word: "customs", meaning: "عادات" },
-      { word: "tradition", meaning: "تقليد" },
-      { word: "global village", meaning: "قرية عالمية" },
-      { word: "cultural identity", meaning: "هوية ثقافية" }
-    ]
-  },
-  "unit8": {
-    title: "Unit 8: Human Rights & Citizenship",
-    words: [
-      { word: "democracy", meaning: "ديمقراطية" },
-      { word: "justice", meaning: "عدالة" },
-      { word: "equality", meaning: "مساواة" },
-      { word: "freedom of speech", meaning: "حرية التعبير" },
-      { word: "constitution", meaning: "دستور" },
-      { word: "human dignity", meaning: "كرامة إنسانية" },
-      { word: "solidarity", meaning: "تضامن" },
-      { word: "citizenship", meaning: "مواطنة" },
-      { word: "non-governmental", meaning: "غير حكومي" },
-      { word: "advocacy", meaning: "مناصرة" }
-    ]
-  },
-  "unit9": {
-    title: "Unit 9: Science & Research",
-    words: [
-      { word: "experiment", meaning: "تجربة" },
-      { word: "hypothesis", meaning: "فرضية" },
-      { word: "laboratory", meaning: "مختبر" },
-      { word: "phenomenon", meaning: "ظاهرة" },
-      { word: "analysis", meaning: "تحليل" },
-      { word: "scientific method", meaning: "منهج علمي" },
-      { word: "peer review", meaning: "مراجعة الأقران" },
-      { word: "breakthrough", meaning: "اختراق" },
-      { word: "discovery", meaning: "اكتشاف" },
-      { word: "innovation", meaning: "ابتكار" }
-    ]
-  },
   "unit10": {
-    title: "Unit 10: Morocco & World Issues",
+    title: "Unit 10: Citizenship & Environment",
     words: [
-      { word: "sovereignty", meaning: "سيادة" },
-      { word: "diplomacy", meaning: "دبلوماسية" },
-      { word: "Sahara", meaning: "الصحراء" },
-      { word: "development", meaning: "تنمية" },
-      { word: "infrastructure", meaning: "بنية تحتية" },
-      { word: "tourism", meaning: "سياحة" },
-      { word: "cooperation", meaning: "تعاون" },
-      { word: "trade", meaning: "تجارة" },
-      { word: "foreign policy", meaning: "سياسة خارجية" },
-      { word: "peacekeeping", meaning: "حفظ السلام" }
+      { word: "citizenship", meaning: "مواطنة" },
+      { word: "democracy", meaning: "ديمقراطية" },
+      { word: "election", meaning: "انتخابات" },
+      { word: "constitution", meaning: "دستور" },
+      { word: "sustainability", meaning: "استدامة" },
+      { word: "recycling", meaning: "تدوير" },
+      { word: "pollution", meaning: "تلوث" },
+      { word: "conservation", meaning: "حماية" },
+      { word: "ecology", meaning: "بيئة" },
+      { word: "renewable", meaning: "متجدد" }
     ]
   }
 };
